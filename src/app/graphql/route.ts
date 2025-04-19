@@ -1,29 +1,21 @@
 import "reflect-metadata";
-
 import { ApolloServer } from "@apollo/server";
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServerPluginLandingPageLocalDefault } from "@apollo/server/plugin/landingPage/default";
-import { MeResolver } from "../../apollo/resolvers";
-import { buildSchema } from "type-graphql";
 import { NextRequest } from "next/server";
+import { createSchema } from "../../apollo/schema";
 
-// Ensure proper schema generation
-const schema = await buildSchema({
-  resolvers: [MeResolver],
-  validate: false, // Disable validation during build
-  skipCheck: true, // Skip some checks that might cause issues
-});
+// Create the schema
+const schema = await createSchema();
 
+// Create the Apollo Server
 const apolloServer = new ApolloServer({
   schema,
   plugins: [ApolloServerPluginLandingPageLocalDefault()],
   introspection: true,
-  formatError: (error) => {
-    console.error("GraphQL Error:", error);
-    return error;
-  },
 });
 
+// Create the handler
 const handler = startServerAndCreateNextHandler<NextRequest>(apolloServer, {
   context: async (req) => ({ req }),
 });

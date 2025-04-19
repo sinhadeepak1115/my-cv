@@ -1,58 +1,74 @@
 import { Resolver, Query } from "type-graphql";
-import { Me } from "./type-defs";
+import { Me, Work, Education, Contact, Social, Project } from "./type-defs";
 import { RESUME_DATA } from "../data/resume-data";
 
 @Resolver(() => Me)
 export class MeResolver {
   @Query(() => Me)
   me(): Me {
-    // Convert the work descriptions from JSX to string and handle readonly arrays
-    const work = RESUME_DATA.work.map((w) => ({
-      ...w,
+    // Convert work data
+    const work: Work[] = RESUME_DATA.work.map((w) => ({
+      company: w.company,
+      link: w.link,
+      badges: [...w.badges],
+      title: w.title,
+      start: w.start,
+      end: w.end,
       description:
         typeof w.description === "string"
           ? w.description
           : w.description.props.children[0],
-      badges: [...w.badges],
     }));
 
-    // Convert readonly arrays to mutable arrays
-    const badges = [...RESUME_DATA.badges];
-    const skills = [...RESUME_DATA.skills];
-    const projects = RESUME_DATA.projects.map((p) => ({
-      ...p,
-      techStack: [...p.techStack],
-    }));
-
-    // Convert readonly contact.social array to mutable array
-    const contact = {
-      ...RESUME_DATA.contact,
-      social: RESUME_DATA.contact.social.map((s) => ({
-        ...s,
-        name: s.name,
-        url: s.url,
-      })),
-    };
-
-    // Convert readonly education array to mutable array
-    const education = RESUME_DATA.education.map((e) => ({
-      ...e,
+    // Convert education data
+    const education: Education[] = RESUME_DATA.education.map((e) => ({
       school: e.school,
       degree: e.degree,
       start: e.start,
       end: e.end,
     }));
 
+    // Convert contact data
+    const contact: Contact = {
+      email: RESUME_DATA.contact.email,
+      tel: RESUME_DATA.contact.tel,
+      social: RESUME_DATA.contact.social.map(
+        (s): Social => ({
+          name: s.name,
+          url: s.url,
+        }),
+      ),
+    };
+
+    // Convert projects data
+    const projects: Project[] = RESUME_DATA.projects.map((p) => ({
+      title: p.title,
+      techStack: [...p.techStack],
+      description: p.description,
+      link: p.link
+        ? {
+            label: p.link.label,
+            href: p.link.href,
+          }
+        : undefined,
+    }));
+
+    // Return the complete Me object
     return {
-      ...RESUME_DATA,
-      work,
-      badges,
-      skills,
-      projects,
+      name: RESUME_DATA.name,
+      initials: RESUME_DATA.initials,
+      location: RESUME_DATA.location,
+      locationLink: RESUME_DATA.locationLink,
+      about: RESUME_DATA.about,
+      summary: RESUME_DATA.summary,
+      avatarUrl: RESUME_DATA.avatarUrl,
+      personalWebsiteUrl: RESUME_DATA.personalWebsiteUrl,
+      badges: [...RESUME_DATA.badges],
       contact,
       education,
-      // Remove certifications as they're not in the schema
-      certifications: undefined,
-    } as Me;
+      work,
+      skills: [...RESUME_DATA.skills],
+      projects,
+    };
   }
 }
