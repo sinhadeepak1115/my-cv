@@ -110,6 +110,9 @@ export class Me {
   @Field(() => String)
   personalWebsiteUrl: string;
 
+  @Field(() => [String])
+  badges: string[];
+
   @Field(() => Contact)
   contact: Contact;
 

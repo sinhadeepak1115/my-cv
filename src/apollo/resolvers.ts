@@ -6,6 +6,20 @@ import { RESUME_DATA } from "../data/resume-data";
 export class MeResolver {
   @Query(() => Me)
   me(): Me {
-    return RESUME_DATA as any;
+    // Convert the work descriptions from JSX to string
+    const work = RESUME_DATA.work.map((w) => ({
+      ...w,
+      description:
+        typeof w.description === "string"
+          ? w.description
+          : w.description.props.children[0],
+    }));
+
+    return {
+      ...RESUME_DATA,
+      work,
+      // Remove certifications as they're not in the schema
+      certifications: undefined,
+    } as Me;
   }
 }
