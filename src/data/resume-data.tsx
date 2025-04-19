@@ -11,7 +11,6 @@ import { icons } from "lucide-react";
 
 export const RESUME_DATA = {
   name: "Deepak Kumar Sinha",
-  badges: ["Hire Me!"],
   initials: "DS",
   location: "Chennai, India, IST",
   locationLink:
