@@ -11,19 +11,15 @@ import { icons } from "lucide-react";
 
 export const RESUME_DATA = {
   name: "Deepak Kumar Sinha",
+  badges: ["Hire Me!"],
   initials: "DS",
   location: "Chennai, India, IST",
   locationLink:
     "https://www.google.com/maps/place/Estancia+Tower+1/@12.8270806,80.0393295,15z/data=!3m1!4b1!4m6!3m5!1s0x3a52f70b945e4e71:0xc4ebd0231c59cc38!8m2!3d12.8270599!4d80.0496292!16s%2Fg%2F11bxfxjd3x?entry=ttu&g_ep=EgoyMDI1MDQxNi4xIKXMDSoASAFQAw%3D%3D",
   about:
     "Aspiring Full Stack Developer with a strong interest in system design and building scalable web applications.",
-  summary: (
-    <>
-      Final-year B.TecD student with hands-on experience in real-time web apps,
-      full-stack development, and DevOps. Passionate about clean architecture,
-      WebSockets, and performance optimization.
-    </>
-  ),
+  summary:
+    "Final-year B.Tech student with hands-on experience in real-time web apps, full-stack development, and DevOps. Passionate about clean architecture, WebSockets, and performance optimization.",
   avatarUrl: "https://avatars.githubusercontent.com/u/94794077?v=4",
   personalWebsiteUrl: "", // Add personal portfolio URL if available
   contact: {
