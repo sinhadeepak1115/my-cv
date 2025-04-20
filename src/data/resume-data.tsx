@@ -1,11 +1,4 @@
-import {
-  ClevertechLogo,
-  ConsultlyLogo,
-  JojoMobileLogo,
-  MonitoLogo,
-  NSNLogo,
-  ParabolLogo,
-} from "@/images/logos";
+import { JojoMobileLogo, MonitoLogo, ParabolLogo } from "@/images/logos";
 import { GitHubIcon, LinkedInIcon, XIcon } from "@/components/icons";
 import { icons } from "lucide-react";
 
