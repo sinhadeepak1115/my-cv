@@ -8,6 +8,7 @@ import { GlobeIcon, MailIcon, PhoneIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { RESUME_DATA } from "@/data/resume-data";
 import { ProjectCard } from "@/components/project-card";
+import GitHubCalendar from "react-github-calendar";
 
 export const metadata: Metadata = {
   title: `${RESUME_DATA.name} | ${RESUME_DATA.about}`,
@@ -92,6 +93,12 @@ export default function Page() {
             <AvatarFallback>{RESUME_DATA.initials}</AvatarFallback>
           </Avatar>
         </div>
+        <Section>
+          <div className="rounded-xl border border-gray-600 bg-white p-4 dark:border-gray-600 dark:bg-gray-950">
+            {" "}
+            <GitHubCalendar username="sinhadeepak1115" />
+          </div>
+        </Section>
         <Section>
           <h2 className="text-xl font-bold">About</h2>
           <p className="text-pretty font-mono text-sm text-muted-foreground">
